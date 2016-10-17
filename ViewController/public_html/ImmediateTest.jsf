@@ -4,31 +4,41 @@
         xmlns:h="http://java.sun.com/jsf/html">
     <af:document title="ImmediateTest.jsf" id="d1">
         <af:form id="f1">
-            <af:panelStretchLayout id="psl1">
+            <af:popup childCreation="deferred" autoCancel="disabled" id="p1">
+                <af:panelGroupLayout id="pgl2">
+                    <af:outputText value="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel ipsum maximus, posuere purus eget, auctor arcu. Praesent dictum, ipsum non gravida blandit, magna metus pretium nisl, ac hendrerit tellus sapien eget ex. Fusce at purus rhoncus quam pretium convallis vestibulum id massa. Ut non est ullamcorper, egestas dui eget, aliquam justo. Nulla posuere et odio at accumsan. Nam dignissim ac odio non varius. Donec venenatis tincidunt mi, semper sagittis diam iaculis eu. Integer est nibh, rutrum vel pellentesque ut, pharetra sed arcu. Integer tempus sagittis dui, vel ornare elit dapibus vel. Nunc vitae urna non turpis tincidunt sagittis vitae et eros. Etiam id tincidunt eros, eu cursus est. Mauris rhoncus, nulla ut sodales bibendum, ligula tellus tincidunt neque, a dignissim justo enim sed est. "
+                                   id="ot5"/>
+                </af:panelGroupLayout>
+            </af:popup>
+            <af:panelStretchLayout id="psl1" topHeight="150px">
                 <f:facet name="start"/>
                 <f:facet name="end"/>
-                <f:facet name="top"/>
-                <f:facet name="bottom"/>
-                <f:facet name="center">
+                <f:facet name="top">
                     <af:panelGroupLayout id="pgl1" layout="vertical">
-                        <af:outputText value='OK - bez bypassa' id="ot3"/>
-                        <af:outputText value='Cancel - bypass ukljucen' id="ot4"/>
-                        <af:outputText value="Clear-brise log&quot;" id="ot2"/>
-                        <af:inputText label="Label 1" id="it1" required="true" immediate="true"/>
+                        <af:inputText label="Label 1" id="it1" required="true" partialTriggers="cb1"/>
                         <af:toolbar id="t1">
                             <af:button text="Ok" id="b1" actionListener="#{testBean.okButton}"/>
-                            <af:commandButton text="Cancel" id="cb1" actionListener="#{testBean.buttonActionListener}"
-                                              immediate="true" action="someAction">
+                            <af:commandButton text="Cancel" id="cb1"
+                                              immediate="true" actionListener="#{testBean.buttonActionListener}">
                                 <af:clientAttribute name="superImmediate" value="#{true}"/>
                                 <af:clientListener method="catchActionEvent" type="action"/>
                                 <af:serverListener type="customButtonAction"
                                                    method="#{testBean.customButtonActionListener}"/>
                             </af:commandButton>
-                            <af:button text="Clear" id="b2" actionListener="#{testBean.clearButton}"/>
+                            <af:button text="Clear" id="b2" actionListener="#{testBean.clearButton}" immediate="true"/>
+                            <af:button text="Popup Bypass" id="b3" immediate="true">
+                                <af:clientAttribute name="superImmediate" value="#{true}"/>
+                                <af:showPopupBehavior popupId="p1"/>
+                            </af:button>
+                            <af:button text="Popup" id="b4" immediate="true">
+                                <af:showPopupBehavior popupId="p1"/>
+                            </af:button>
                         </af:toolbar>
                         <af:outputText value="#{testBean.natpis}" id="ot1" partialTriggers="b1 cb1 b2"/>
                     </af:panelGroupLayout>
                 </f:facet>
+                <f:facet name="bottom"/>
+                <f:facet name="center"/>
             </af:panelStretchLayout>
         </af:form>
     </af:document>
