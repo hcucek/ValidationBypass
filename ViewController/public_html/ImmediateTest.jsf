@@ -11,22 +11,22 @@
                 <f:facet name="bottom"/>
                 <f:facet name="center">
                     <af:panelGroupLayout id="pgl1" layout="vertical">
-                    
-                    
+                        <af:outputText value='OK - bez bypassa' id="ot3"/>
+                        <af:outputText value='Cancel - bypass ukljucen' id="ot4"/>
+                        <af:outputText value="Clear-brise log&quot;" id="ot2"/>
                         <af:inputText label="Label 1" id="it1" required="true" immediate="true"/>
-                        
-                         <af:commandButton text="Cancel" id="cb1"   
-                            actionListener="#{testBean.buttonActionListener}"          
-                            immediate="true"  
-                            action="someAction">  
-                        
-                            <af:clientAttribute name="superImmediate" value="#{true}"/>                  
-                            <af:clientListener method="catchActionEvent" type="action"/>  
-                            <af:serverListener type="customButtonAction"  
-                                method="#{testBean.customButtonActionListener}"/>  
-  
-                        </af:commandButton>
-                        <af:button text="Ok" id="b1" actionListener="#{testBean.okButton}"/>
+                        <af:toolbar id="t1">
+                            <af:button text="Ok" id="b1" actionListener="#{testBean.okButton}"/>
+                            <af:commandButton text="Cancel" id="cb1" actionListener="#{testBean.buttonActionListener}"
+                                              immediate="true" action="someAction">
+                                <af:clientAttribute name="superImmediate" value="#{true}"/>
+                                <af:clientListener method="catchActionEvent" type="action"/>
+                                <af:serverListener type="customButtonAction"
+                                                   method="#{testBean.customButtonActionListener}"/>
+                            </af:commandButton>
+                            <af:button text="Clear" id="b2" actionListener="#{testBean.clearButton}"/>
+                        </af:toolbar>
+                        <af:outputText value="#{testBean.natpis}" id="ot1" partialTriggers="b1 cb1 b2"/>
                     </af:panelGroupLayout>
                 </f:facet>
             </af:panelStretchLayout>
