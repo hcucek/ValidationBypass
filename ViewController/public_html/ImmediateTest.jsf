@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+        xmlns:h="http://java.sun.com/jsf/html">
+    <af:document title="ImmediateTest.jsf" id="d1">
+        <af:form id="f1">
+            <af:panelStretchLayout id="psl1">
+                <f:facet name="start"/>
+                <f:facet name="end"/>
+                <f:facet name="top"/>
+                <f:facet name="bottom"/>
+                <f:facet name="center">
+                    <af:panelGroupLayout id="pgl1" layout="vertical">
+                    
+                    
+                        <af:inputText label="Label 1" id="it1" required="true" immediate="true"/>
+                        
+                         <af:commandButton text="Cancel" id="cb1"   
+                            actionListener="#{testBean.buttonActionListener}"          
+                            immediate="true"  
+                            action="someAction">  
+                        
+                            <af:clientAttribute name="superImmediate" value="#{true}"/>                  
+                            <af:clientListener method="catchActionEvent" type="action"/>  
+                            <af:serverListener type="customButtonAction"  
+                                method="#{testBean.customButtonActionListener}"/>  
+  
+                        </af:commandButton>
+                        <af:button text="Ok" id="b1" actionListener="#{testBean.okButton}"/>
+                    </af:panelGroupLayout>
+                </f:facet>
+            </af:panelStretchLayout>
+        </af:form>
+    </af:document>
+
+
+    <af:resource type="javascript">    
+       
+     // This hack avoids client-side validation for the "superImmediate"  
+     // commandComponents  
+     AdfActionEvent.prototype.isValidationNeeded = function()  
+       {  
+         return !this.getSource().getProperty("superImmediate");  
+       }   
+         
+    // Action event will cause server-side validation at the  
+    // Apply Request Values phase (for immediate button).  
+    // So we'll get validation error even if the client-side validation is suppressed  
+    // We need to catch the original Action event, cancel it and replace with our  
+    // custom event customButtonAction.  
+    function catchActionEvent(evt){  
+      AdfCustomEvent.queue(evt.getSource(), 'customButtonAction' , null, true);   
+      evt.cancel();                    
+    }     
+      
+   </af:resource>  
+   
+</f:view>
