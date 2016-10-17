@@ -1,2 +1,2 @@
 # ValidationBypass
-JS bypass validacije
+JS bypass validacije immediate polja za unos.
