@@ -6,8 +6,9 @@
         <af:messages id="m1"/>
         <af:form id="f1">
             <af:popup childCreation="deferred" autoCancel="disabled" id="p1">
-                <af:panelWindow id="pw1" inlineStyle="width: 370px !important" title="Testni popup">
-                    <af:panelGroupLayout id="pgl2" inlineStyle="width: 350px !important" layout="vertical">
+                <af:panelWindow id="pw1" inlineStyle="width: 270px !important" title="Testni popup" modal="true">
+                    <af:panelGroupLayout id="pgl2" inlineStyle="width: 250px !important" layout="vertical"
+                                         halign="right">
                         <af:inputText value="#{bindings.EmployeeId.inputValue}"
                                       label="#{bindings.EmployeeId.hints.label}"
                                       required="#{bindings.EmployeeId.hints.mandatory}"
@@ -120,11 +121,11 @@
                                                    method="#{testBean.customButtonActionListener}"/>
                             </af:commandButton>
                             <af:button text="Clear" id="b2" actionListener="#{testBean.clearButton}" immediate="true"/>
-                            <af:button text="Popup Bypass" id="b3" immediate="true">
+                            <af:button text="Popup Bypass" id="b3" immediate="true" partialSubmit="false">
                                 <af:clientAttribute name="superImmediate" value="#{true}"/>
                                 <af:showPopupBehavior popupId="p1"/>
                             </af:button>
-                            <af:button text="Popup" id="b4" immediate="true">
+                            <af:button text="Popup" id="b4" immediate="false">
                                 <af:showPopupBehavior popupId="p1"/>
                             </af:button>
                         </af:toolbar>
@@ -140,12 +141,9 @@
                                   rowBandingInterval="0" fetchSize="#{bindings.EmployeesVO1.rangeSize}" id="t2"
                                   selectedRowKeys="#{bindings.EmployeesVO1.collectionModel.selectedRow}"
                                   selectionListener="#{bindings.EmployeesVO1.collectionModel.makeCurrent}"
-                                  rowSelection="single" filterModel="#{bindings.EmployeesVO1Query.queryDescriptor}"
-                                  filterVisible="true" queryListener="#{bindings.EmployeesVO1Query.processQuery}"
-                                  varStatus="vs">
-                            <af:column sortProperty="#{bindings.EmployeesVO1.hints.EmployeeId.name}" filterable="true"
-                                       sortable="true" headerText="#{bindings.EmployeesVO1.hints.EmployeeId.label}"
-                                       id="c3">
+                                  rowSelection="single">
+                            <af:column sortProperty="#{bindings.EmployeesVO1.hints.EmployeeId.name}" sortable="true"
+                                       headerText="#{bindings.EmployeesVO1.hints.EmployeeId.label}" id="c3">
                                 <af:outputText value="#{row.EmployeeId}"
                                                shortDesc="#{bindings.EmployeesVO1.hints.EmployeeId.tooltip}" id="ot7">
                                     <af:convertNumber groupingUsed="false"
@@ -153,26 +151,22 @@
                                 </af:outputText>
                             </af:column>
                             <af:column headerText="#{bindings.EmployeesVO1.hints.Email.label}" id="c1"
-                                       sortProperty="#{bindings.EmployeesVO1.hints.Email.name}" filterable="true"
-                                       sortable="true">
+                                       sortProperty="#{bindings.EmployeesVO1.hints.Email.name}" sortable="true">
                                 <af:outputText value="#{row.Email}"
                                                shortDesc="#{bindings.EmployeesVO1.hints.Email.tooltip}" id="ot3"/>
                             </af:column>
                             <af:column headerText="#{bindings.EmployeesVO1.hints.FirstName.label}" id="c2"
-                                       sortProperty="#{bindings.EmployeesVO1.hints.FirstName.name}" filterable="true"
-                                       sortable="true">
+                                       sortProperty="#{bindings.EmployeesVO1.hints.FirstName.name}" sortable="true">
                                 <af:outputText value="#{row.FirstName}"
                                                shortDesc="#{bindings.EmployeesVO1.hints.FirstName.tooltip}" id="ot4"/>
                             </af:column>
                             <af:column headerText="#{bindings.EmployeesVO1.hints.LastName.label}" id="c5"
-                                       sortProperty="#{bindings.EmployeesVO1.hints.LastName.name}" filterable="true"
-                                       sortable="true">
+                                       sortProperty="#{bindings.EmployeesVO1.hints.LastName.name}" sortable="true">
                                 <af:outputText value="#{row.LastName}"
                                                shortDesc="#{bindings.EmployeesVO1.hints.LastName.tooltip}" id="ot6"/>
                             </af:column>
                             <af:column headerText="#{bindings.EmployeesVO1.hints.PhoneNumber.label}" id="c7"
-                                       sortProperty="#{bindings.EmployeesVO1.hints.PhoneNumber.name}" filterable="true"
-                                       sortable="true">
+                                       sortProperty="#{bindings.EmployeesVO1.hints.PhoneNumber.name}" sortable="true">
                                 <af:outputText value="#{row.PhoneNumber}"
                                                shortDesc="#{bindings.EmployeesVO1.hints.PhoneNumber.tooltip}" id="ot2"/>
                             </af:column>
