@@ -14,7 +14,7 @@
                                       required="#{bindings.EmployeeId.hints.mandatory}"
                                       columns="#{bindings.EmployeeId.hints.displayWidth}"
                                       maximumLength="#{bindings.EmployeeId.hints.precision}"
-                                      shortDesc="#{bindings.EmployeeId.hints.tooltip}" id="it2">
+                                      shortDesc="#{bindings.EmployeeId.hints.tooltip}" id="it2" autoSubmit="true">
                             <f:validator binding="#{bindings.EmployeeId.validator}"/>
                             <af:convertNumber groupingUsed="false" pattern="#{bindings.EmployeeId.format}"/>
                         </af:inputText>
@@ -47,6 +47,20 @@
                                       shortDesc="#{bindings.PhoneNumber.hints.tooltip}" id="it7">
                             <f:validator binding="#{bindings.PhoneNumber.validator}"/>
                         </af:inputText>
+                        <af:inputDate value="#{bindings.HireDate.inputValue}" label="#{bindings.HireDate.hints.label}"
+                                      required="#{bindings.HireDate.hints.mandatory}"
+                                      columns="#{bindings.HireDate.hints.displayWidth}"
+                                      shortDesc="#{bindings.HireDate.hints.tooltip}" id="id1">
+                            <f:validator binding="#{bindings.HireDate.validator}"/>
+                            <af:convertDateTime pattern="#{bindings.HireDate.format}"/>
+                        </af:inputDate>
+                        <af:inputText value="#{bindings.JobId.inputValue}" label="#{bindings.JobId.hints.label}"
+                                      required="#{bindings.JobId.hints.mandatory}"
+                                      columns="#{bindings.JobId.hints.displayWidth}"
+                                      maximumLength="#{bindings.JobId.hints.precision}"
+                                      shortDesc="#{bindings.JobId.hints.tooltip}" id="it12">
+                            <f:validator binding="#{bindings.JobId.validator}"/>
+                        </af:inputText>
                         <af:panelGroupLayout id="pgl5" layout="horizontal">
                             <af:button actionListener="#{bindings.Commit.execute}" text="Commit"
                                        disabled="#{!bindings.Commit.enabled}" id="b7"/>
@@ -54,25 +68,29 @@
                                        disabled="false" immediate="true" id="b8">
                                 <af:resetActionListener/>
                             </af:button>
+                            <af:button actionListener="#{bindings.CreateInsert.execute}" text="CreateInsert"
+                                       disabled="#{!bindings.CreateInsert.enabled}" id="b10" partialSubmit="false"/>
                         </af:panelGroupLayout>
                     </af:panelGroupLayout>
                 </af:panelWindow>
             </af:popup>
             <af:panelStretchLayout id="psl1" topHeight="100px" startWidth="250px">
                 <f:facet name="start">
-                    <af:panelGroupLayout id="pgl4" layout="vertical">
+                    <af:panelGroupLayout id="pgl4" layout="vertical" halign="right">
                         <af:button actionListener="#{bindings.Commit.execute}" text="Commit"
                                    disabled="#{!bindings.Commit.enabled}" id="b5"/>
                         <af:button actionListener="#{bindings.Rollback.execute}" text="Rollback"
                                    disabled="false" immediate="true" id="b6">
                             <af:resetActionListener/>
                         </af:button>
+                        <af:button actionListener="#{bindings.CreateInsert.execute}" text="CreateInsert"
+                                   disabled="#{!bindings.CreateInsert.enabled}" id="b9" partialSubmit="false"/>
                         <af:inputText value="#{bindings.EmployeeId.inputValue}"
                                       label="#{bindings.EmployeeId.hints.label}"
                                       required="#{bindings.EmployeeId.hints.mandatory}"
                                       columns="#{bindings.EmployeeId.hints.displayWidth}"
                                       maximumLength="#{bindings.EmployeeId.hints.precision}"
-                                      shortDesc="#{bindings.EmployeeId.hints.tooltip}" id="it6">
+                                      shortDesc="#{bindings.EmployeeId.hints.tooltip}" id="it6" autoSubmit="true">
                             <f:validator binding="#{bindings.EmployeeId.validator}"/>
                             <af:convertNumber groupingUsed="false" pattern="#{bindings.EmployeeId.format}"/>
                         </af:inputText>
@@ -80,21 +98,21 @@
                                       required="#{bindings.Email.hints.mandatory}"
                                       columns="#{bindings.Email.hints.displayWidth}"
                                       maximumLength="#{bindings.Email.hints.precision}"
-                                      shortDesc="#{bindings.Email.hints.tooltip}" id="it8">
+                                      shortDesc="#{bindings.Email.hints.tooltip}" id="it8" disabled="true">
                             <f:validator binding="#{bindings.Email.validator}"/>
                         </af:inputText>
                         <af:inputText value="#{bindings.FirstName.inputValue}" label="#{bindings.FirstName.hints.label}"
                                       required="#{bindings.FirstName.hints.mandatory}"
                                       columns="#{bindings.FirstName.hints.displayWidth}"
                                       maximumLength="#{bindings.FirstName.hints.precision}"
-                                      shortDesc="#{bindings.FirstName.hints.tooltip}" id="it9">
+                                      shortDesc="#{bindings.FirstName.hints.tooltip}" id="it9" disabled="true">
                             <f:validator binding="#{bindings.FirstName.validator}"/>
                         </af:inputText>
                         <af:inputText value="#{bindings.LastName.inputValue}" label="#{bindings.LastName.hints.label}"
                                       required="#{bindings.LastName.hints.mandatory}"
                                       columns="#{bindings.LastName.hints.displayWidth}"
                                       maximumLength="#{bindings.LastName.hints.precision}"
-                                      shortDesc="#{bindings.LastName.hints.tooltip}" id="it10">
+                                      shortDesc="#{bindings.LastName.hints.tooltip}" id="it10" disabled="true">
                             <f:validator binding="#{bindings.LastName.validator}"/>
                         </af:inputText>
                         <af:inputText value="#{bindings.PhoneNumber.inputValue}"
@@ -102,15 +120,29 @@
                                       required="#{bindings.PhoneNumber.hints.mandatory}"
                                       columns="#{bindings.PhoneNumber.hints.displayWidth}"
                                       maximumLength="#{bindings.PhoneNumber.hints.precision}"
-                                      shortDesc="#{bindings.PhoneNumber.hints.tooltip}" id="it11">
+                                      shortDesc="#{bindings.PhoneNumber.hints.tooltip}" id="it11" disabled="true">
                             <f:validator binding="#{bindings.PhoneNumber.validator}"/>
                         </af:inputText>
+                        <af:popup childCreation="deferred" autoCancel="disabled" id="aaa">
+                            <af:panelWindow id="pw2">
+                                <af:inputText value="#{bindings.EmployeeId.inputValue}"
+                                              label="#{bindings.EmployeeId.hints.label}"
+                                              required="#{bindings.EmployeeId.hints.mandatory}"
+                                              columns="#{bindings.EmployeeId.hints.displayWidth}"
+                                              maximumLength="#{bindings.EmployeeId.hints.precision}"
+                                              shortDesc="#{bindings.EmployeeId.hints.tooltip}" id="it13">
+                                    <f:validator binding="#{bindings.EmployeeId.validator}"/>
+                                    <af:convertNumber groupingUsed="false" pattern="#{bindings.EmployeeId.format}"/>
+                                </af:inputText>
+                            </af:panelWindow>
+                        </af:popup>
                     </af:panelGroupLayout>
                 </f:facet>
                 <f:facet name="end"/>
                 <f:facet name="top">
                     <af:panelGroupLayout id="pgl1" layout="vertical">
-                        <af:inputText label="Label 1" id="it1" required="true" partialTriggers="cb1"/>
+                        <af:inputText label="Label 1" id="it1" required="true" partialTriggers="cb1" disabled="false"
+                                      rendered="false"/>
                         <af:toolbar id="t1">
                             <af:button text="Ok" id="b1" actionListener="#{testBean.okButton}"/>
                             <af:commandButton text="Cancel" id="cb1"
@@ -141,7 +173,8 @@
                                   rowBandingInterval="0" fetchSize="#{bindings.EmployeesVO1.rangeSize}" id="t2"
                                   selectedRowKeys="#{bindings.EmployeesVO1.collectionModel.selectedRow}"
                                   selectionListener="#{bindings.EmployeesVO1.collectionModel.makeCurrent}"
-                                  rowSelection="single">
+                                  rowSelection="single"
+                                  partialTriggers="::b10 ::b9 ::b3 ::b4 ::t2 ::b5 ::b6 ::it6 ::it8 ::it9 ::it10 ::it11">
                             <af:column sortProperty="#{bindings.EmployeesVO1.hints.EmployeeId.name}" sortable="true"
                                        headerText="#{bindings.EmployeesVO1.hints.EmployeeId.label}" id="c3">
                                 <af:outputText value="#{row.EmployeeId}"

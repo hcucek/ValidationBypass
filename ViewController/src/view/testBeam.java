@@ -4,7 +4,12 @@ import java.io.Serializable;
 
 import javax.faces.event.ActionEvent;
 
+import oracle.adf.model.BindingContext;
 import oracle.adf.view.rich.render.ClientEvent;
+
+import oracle.binding.BindingContainer;
+
+import oracle.binding.OperationBinding;
 
 import org.apache.myfaces.trinidad.component.UIXCommand;
 
@@ -42,4 +47,11 @@ public class testBeam implements Serializable {
     public String getNatpis() {
         return "Log: \n"+ log.toString();
     }
+
+    public void openPopup(ActionEvent actionEvent) {
+        BindingContainer bindings = BindingContext.getCurrent().getCurrentBindingsEntry();
+        OperationBinding ob = bindings.getOperationBinding("methodAction");  
+        ob.execute(); 
+
+}
 }

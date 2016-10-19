@@ -10,7 +10,8 @@
   DBObjectName="EMPLOYEES"
   AliasName="Employees"
   BindingStyle="OracleName"
-  RowClass="model.EmployeesImpl">
+  RowClass="model.EmployeesImpl"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Access|DML"/>
     <Attr Name="_isCodegen" Value="true"/>
@@ -216,4 +217,18 @@
       <Item Value="model.Employees.ManagerId"/>
     </AttrArray>
   </Key>
+  <validation:ExistsValidationBean
+    Name="EmployeesRule0"
+    ResId="model.Employees_Rule_0"
+    OperandType="EO"
+    AssocName="model.EmpManagerFkAssoc">
+    <validation:OnAttributes>
+      <validation:Item
+        Value="ManagerId"/>
+    </validation:OnAttributes>
+  </validation:ExistsValidationBean>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="model.ModelBundle"/>
+  </ResourceBundle>
 </Entity>
